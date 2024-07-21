@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,19 +24,22 @@ public class Treino implements Serializable {
     private String nomeDoTreinador;
 
     @JsonFormat(pattern = "dd/mm/yyyy")
-    private String dataInicio;
+    private Date dataInicio;
     @JsonFormat(pattern = "dd/mm/yyyy")
-    private String dataFim;
+    private Date dataFim;
 
     @ManyToOne
     @JoinColumn(name="cliente_id")
     @JsonIgnore
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "treino", cascade = CascadeType.ALL)
+    private List<Exercicio> exercicio = new ArrayList<>();
+
     public Treino() {
     }
 
-    public Treino(Integer id, String nomeDeTreino, String nomeDoTreinador, String dataInicio, String dataFim) {
+    public Treino(Integer id, String nomeDeTreino, String nomeDoTreinador, Date dataInicio, Date dataFim) {
         this.id = id;
         this.nomeDeTreino = nomeDeTreino;
         this.nomeDoTreinador = nomeDoTreinador;

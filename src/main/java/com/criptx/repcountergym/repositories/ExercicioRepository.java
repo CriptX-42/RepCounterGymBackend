@@ -1,9 +1,9 @@
 package com.criptx.repcountergym.repositories;
 
-import com.criptx.repcountergym.domain.Treino;
+import com.criptx.repcountergym.domain.Exercicio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TreinoRepository extends JpaRepository<Treino, Integer> {
+public interface ExercicioRepository extends JpaRepository<Exercicio, Integer> {
 }
