@@ -1,6 +1,7 @@
 package com.criptx.repcountergym.services;
 
 import com.criptx.repcountergym.domain.Cliente;
+import com.criptx.repcountergym.domain.Treino;
 import com.criptx.repcountergym.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class ClienteService {
     }
 
     public Cliente save(Cliente cliente){
+        for (Treino treino: cliente.getTreinos()) {
+            treino.setCliente(cliente);
+        }
         return clienteRepository.save(cliente);
     }
 
