@@ -1,16 +1,23 @@
 package com.criptx.repcountergym.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.criptx.repcountergym.utils.ModoPagamento;
+import com.criptx.repcountergym.utils.StatusPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
 public class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,24 +25,13 @@ public class Pagamento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nome;
-    private Double altura;
-    private Double peso;
-    private Double idade;
-    private String email;
+    private BigDecimal valor;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Treino> treinos = new ArrayList<>();
+    private LocalDateTime dataPagamento;
+    private ModoPagamento metodo;
+    private StatusPagamento status;
+    private String descricao;
 
-    public Pagamento() {
-    }
-
-    public Pagamento(Integer id, String nome, Double altura, Double peso, Double idade, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.altura = altura;
-        this.peso = peso;
-        this.idade = idade;
-        this.email = email;
-    }
+    @Column(name = "cliente_id", nullable = false)
+    private Long clienteId;
 }

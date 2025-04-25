@@ -1,7 +1,6 @@
 package com.criptx.repcountergym.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,15 +29,4 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Treino> treinos = new ArrayList<>();
 
-    public Cliente() {
-    }
-
-    public Cliente(Integer id, String nome, Double altura, Double peso, Double idade, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.altura = altura;
-        this.peso = peso;
-        this.idade = idade;
-        this.email = email;
-    }
 }

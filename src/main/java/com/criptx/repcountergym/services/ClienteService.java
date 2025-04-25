@@ -41,11 +41,13 @@ public class ClienteService {
     }
 
     public void updateData(Cliente newObj, Cliente cliente) {
-        newObj.setAltura(cliente.getAltura());
-        newObj.setEmail(cliente.getEmail());
-        newObj.setIdade(cliente.getIdade());
-        newObj.setPeso(cliente.getPeso());
-        newObj.setNome(cliente.getNome());
+         cliente.toBuilder()
+                .altura(newObj.getAltura())
+                .email(newObj.getEmail())
+                .idade(newObj.getIdade())
+                .peso(newObj.getPeso())
+                .nome(newObj.getNome())
+                .build();
     }
 
 }
