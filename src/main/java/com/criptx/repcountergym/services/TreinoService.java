@@ -26,8 +26,6 @@ public class TreinoService {
         return treinoRepository.findById(id).orElseThrow(() -> new RuntimeException("treino não encontrado"));
     }
 
-
-
     public void delete(Integer id) {
          treinoRepository.deleteById(id);
     }

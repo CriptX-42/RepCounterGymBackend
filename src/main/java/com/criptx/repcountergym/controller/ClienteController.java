@@ -1,6 +1,7 @@
 package com.criptx.repcountergym.controller;
 
 import com.criptx.repcountergym.domain.Cliente;
+import com.criptx.repcountergym.dto.ClienteDTO;
 import com.criptx.repcountergym.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,17 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cliente>> findAll() {
+    public ResponseEntity<List<ClienteDTO>> findAll() {
         List<Cliente> list = clienteService.list();
-        return ResponseEntity.ok().body(list);
+        List<ClienteDTO> dto = list.stream().map(ClienteDTO::new).toList();
+        return ResponseEntity.ok().body(dto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cliente> listAll(@PathVariable Integer id) {
+    public ResponseEntity<ClienteDTO> listAll(@PathVariable Integer id) {
         Cliente clientFind = clienteService.findById(id);
-        return ResponseEntity.ok().body(clientFind);
+        ClienteDTO dto = new ClienteDTO(clientFind);
+        return ResponseEntity.ok().body(dto);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
